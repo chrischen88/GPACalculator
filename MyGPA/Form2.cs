@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MyGPA
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(firstNameBox.Text.Length > 0 && lastNameBox.Text.Length > 0)
+                {
+                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+                    f.addStudent(firstNameBox.Text, lastNameBox.Text);
+                    f.refreshStudentsTable();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Missing an Input", "ERROR");
+                }
+            }
+            catch (Exception e1) { }
+        }
+    }
+}
