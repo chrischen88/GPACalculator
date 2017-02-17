@@ -40,5 +40,20 @@ namespace MyGPA
                 
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                sql_con.Open();
+                SQLiteDataAdapter sqlData = new SQLiteDataAdapter("select lastName, firstName from students WHERE lastName LIKE '%" + nameBox.Text +"%'", sql_con);
+                DataTable dt = new DataTable();
+                sqlData.Fill(dt);
+                this.dataGridView1.DataSource = dt;
+                sql_con.Close();
+            }
+            catch (Exception e1)
+            { }
+        }
     }
 }
