@@ -15,6 +15,7 @@ namespace MyGPA
     public partial class RemoveStudent : Form
     {
         private SQLiteConnection sql_con;
+        private SQLiteCommand command;
 
         public RemoveStudent()
         {
@@ -37,7 +38,17 @@ namespace MyGPA
         {
             if(dataGridView1.SelectedRows.Count!=0)
             {
-                
+                sql_con.Open();
+                foreach(DataGridViewRow r in dataGridView1.SelectedRows)
+                {
+                    command = new SQLiteCommand("DELETE FROM students WHERE firstName = '" + r.Cells["firstName"].Value + "' AND lastName = '" 
+                        + r.Cells["lastName"].Value + "'", sql_con);
+                    command.ExecuteNonQuery();
+                }
+                sql_con.Close();
+                Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+                f.refreshStudentsTable();
+                this.Close();
             }
         }
 
