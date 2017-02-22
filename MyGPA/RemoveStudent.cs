@@ -37,7 +37,15 @@ namespace MyGPA
         {
             if(dataGridView1.SelectedRows.Count!=0)
             {
-                
+                foreach(DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+                    String fn = row.Cells[1].Value.ToString();
+                    String ln = row.Cells[0].Value.ToString();
+                    String gpa = row.Cells[2].Value.ToString();
+                    String c = row.Cells[3].Value.ToString();
+
+                }
             }
         }
 
