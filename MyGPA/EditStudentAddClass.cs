@@ -15,11 +15,17 @@ namespace MyGPA
     {
         private SQLiteConnection sql_con;
         private SQLiteCommand command;
+        private SQLiteConnection connect;
+        private String firstName;
+        private String lastName;
 
-        public EditStudentAddClass()
+        public EditStudentAddClass(String ln, String fn)
         {
             InitializeComponent();
+            connect = new SQLiteConnection("Data Source = studentsGPA.sqlite");
             sql_con = new SQLiteConnection("Data Source = ClassWeight.db");
+            firstName = fn;
+            lastName = ln;
             sql_con.Open();
             SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT * FROM ClassWeights", sql_con);
             DataTable dt = new DataTable();
@@ -35,7 +41,13 @@ namespace MyGPA
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            sql_con.Open();
+            
+            sql_con.Close();
+            connect.Open();
+            
+            connect.Close();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -51,6 +63,26 @@ namespace MyGPA
             }
             catch (Exception e1)
             { }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString() )> 0.5)
+            {
+                label3.Visible = true;
+                textBox4.Visible = true;
+                this.ClientSize = new System.Drawing.Size(382, 303);
+                this.button1.Location = new System.Drawing.Point(12, 275);
+                this.button2.Location = new System.Drawing.Point(298, 275);
+            }
+            else
+            {
+                label3.Visible = false;
+                textBox4.Visible = false;
+                this.ClientSize = new System.Drawing.Size(382, 280);
+                this.button1.Location = new System.Drawing.Point(12, 254);
+                this.button2.Location = new System.Drawing.Point(298, 254);
+            }
         }
     }
 }

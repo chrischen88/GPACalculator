@@ -47,7 +47,7 @@ namespace MyGPA
         {
             if(Application.OpenForms.OfType<EditStudentAddClass>().Count()==0)
             {
-                EditStudentAddClass es = new EditStudentAddClass();
+                EditStudentAddClass es = new EditStudentAddClass(lastName, firstName);
                 es.Show();
             }
             
