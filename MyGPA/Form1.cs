@@ -59,10 +59,8 @@ namespace MyGPA
                 sql_con.Open();
                 command = new SQLiteCommand("insert into students(lastName, firstName, GPA, credits) values ('" +
                     ls + "', '" + fs + "', '0.000', 0)", sql_con);
-                //Debug.WriteLine(fs + " " + ls);
                 command.ExecuteNonQuery();
                 sql_con.Close();
-                //Debug.WriteLine("addStudent ran.");
             }
             catch (Exception e1) { }
         }
@@ -80,7 +78,7 @@ namespace MyGPA
             catch (Exception e1) { }
         }
 
-        public void removeStudent()
+        private void editStudent_Click(object sender, EventArgs e)
         {
             
         }

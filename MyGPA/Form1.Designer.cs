@@ -32,6 +32,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.editStudent = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // editStudent
+            // 
+            this.editStudent.Location = new System.Drawing.Point(505, 226);
+            this.editStudent.Name = "editStudent";
+            this.editStudent.Size = new System.Drawing.Size(75, 23);
+            this.editStudent.TabIndex = 4;
+            this.editStudent.Text = "Edit";
+            this.editStudent.UseVisualStyleBackColor = true;
+            this.editStudent.Click += new System.EventHandler(this.editStudent_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 319);
+            this.Controls.Add(this.editStudent);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -101,6 +113,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button editStudent;
     }
 }
 
