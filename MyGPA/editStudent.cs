@@ -45,12 +45,22 @@ namespace MyGPA
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            if(Application.OpenForms.OfType<EditStudentAddClass>().Count()==0)
+            {
+                EditStudentAddClass es = new EditStudentAddClass();
+                es.Show();
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
