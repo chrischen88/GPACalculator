@@ -36,20 +36,28 @@ namespace MyGPA
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count!=0)
+            try
             {
-                sql_con.Open();
-                foreach(DataGridViewRow r in dataGridView1.SelectedRows)
+                if (dataGridView1.SelectedRows.Count != 0)
                 {
-                    command = new SQLiteCommand("DELETE FROM students WHERE firstName = '" + r.Cells["firstName"].Value + "' AND lastName = '" 
-                        + r.Cells["lastName"].Value + "'", sql_con);
-                    command.ExecuteNonQuery();
+                    sql_con.Open();
+                    foreach (DataGridViewRow r in dataGridView1.SelectedRows)
+                    {
+                        command = new SQLiteCommand("DROP TABLE grades" + r.Cells["lastName"].Value
+                            + r.Cells["firstName"].Value, sql_con);
+                        command.ExecuteNonQuery();
+                        command = new SQLiteCommand("DELETE FROM students WHERE firstName = '" + r.Cells["firstName"].Value + "' AND lastName = '"
+                            + r.Cells["lastName"].Value + "'", sql_con);
+                        command.ExecuteNonQuery(); 
+                    }
+                    sql_con.Close();
+                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+                    f.refreshStudentsTable();
+                    this.Close();
                 }
-                sql_con.Close();
-                Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
-                f.refreshStudentsTable();
-                this.Close();
             }
+            catch (Exception e1)
+            { }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

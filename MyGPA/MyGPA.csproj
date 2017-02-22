@@ -69,6 +69,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="editStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editStudent.Designer.cs">
+      <DependentUpon>editStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditStudentAddClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditStudentAddClass.Designer.cs">
+      <DependentUpon>EditStudentAddClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +101,12 @@
     <Compile Include="RemoveStudent.Designer.cs">
       <DependentUpon>RemoveStudent.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="editStudent.resx">
+      <DependentUpon>editStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditStudentAddClass.resx">
+      <DependentUpon>EditStudentAddClass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

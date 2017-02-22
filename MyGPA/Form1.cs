@@ -60,6 +60,8 @@ namespace MyGPA
                 command = new SQLiteCommand("insert into students(lastName, firstName, GPA, credits) values ('" +
                     ls + "', '" + fs + "', '0.000', 0)", sql_con);
                 command.ExecuteNonQuery();
+                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int)", sql_con);
+                command.ExecuteNonQuery();
                 sql_con.Close();
             }
             catch (Exception e1) { }
@@ -80,7 +82,18 @@ namespace MyGPA
 
         private void editStudent_Click(object sender, EventArgs e)
         {
-            
+            sql_con.Open();
+            if(dataGridView1.SelectedRows.Count == 1)
+            {
+                DataGridViewRow r = dataGridView1.SelectedRows[0];
+                editStudent es = new MyGPA.editStudent((String)r.Cells["lastName"].Value, (String)r.Cells["firstName"].Value);
+                es.Show();
+            }
+            else
+            {
+                MessageBox.Show("Selected more than 1 student", "ERROR");
+            }
+            sql_con.Close();
         }
     }
 }
