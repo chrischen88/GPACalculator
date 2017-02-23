@@ -22,16 +22,16 @@ namespace MyGPA
         public EditStudentAddClass(String ln, String fn)
         {
             InitializeComponent();
-            connect = new SQLiteConnection("Data Source = studentsGPA.sqlite");
-            sql_con = new SQLiteConnection("Data Source = ClassWeight.db");
+            sql_con = new SQLiteConnection("Data Source = studentsGPA.sqlite");
+            connect = new SQLiteConnection("Data Source = ClassWeight.db");
             firstName = fn;
             lastName = ln;
-            sql_con.Open();
-            SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT * FROM ClassWeights", sql_con);
+            connect.Open();
+            SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT * FROM ClassWeights", connect);
             DataTable dt = new DataTable();
             sqlData.Fill(dt);
             this.dataGridView1.DataSource = dt;
-            sql_con.Close();
+            connect.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -42,24 +42,49 @@ namespace MyGPA
         private void button1_Click(object sender, EventArgs e)
         {
             sql_con.Open();
-            
+            if(dataGridView1.SelectedRows.Count == 1)
+            {
+                if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) > 0.5)
+                {
+                    try
+                    {
+                        DataGridViewRow r = dataGridView1.SelectedRows[0];
+                        command = new SQLiteCommand("INSERT INTO grades"+lastName+firstName+"(className, average, year) VALUES ('"
+                            + r.Cells["className"].Value +" Semester 1', '"+ textBox2.Text +"', "+ textBox3.Text +")",sql_con);
+                        command.ExecuteNonQuery();
+                        command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year) VALUES ('"
+                            + r.Cells["className"].Value + " Semester 2', '" + textBox4.Text + "', " + textBox3.Text + ")",sql_con);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e1)
+                    {
+
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selected more than 1 class","ERROR");
+            }
             sql_con.Close();
-            connect.Open();
-            
-            connect.Close();
-            
+            editStudent es = (editStudent)System.Windows.Forms.Application.OpenForms["editStudent"];
+            es.refreshGrades();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                sql_con.Open();
-                SQLiteDataAdapter sqlData = new SQLiteDataAdapter("select * from ClassWeights WHERE className LIKE '%" + textBox1.Text + "%'", sql_con);
+                connect.Open();
+                SQLiteDataAdapter sqlData = new SQLiteDataAdapter("select * from ClassWeights WHERE className LIKE '%" + textBox1.Text + "%'", connect);
                 DataTable dt = new DataTable();
                 sqlData.Fill(dt);
                 this.dataGridView1.DataSource = dt;
-                sql_con.Close();
+                connect.Close();
             }
             catch (Exception e1)
             { }

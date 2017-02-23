@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace MyGPA
 {
@@ -27,7 +28,7 @@ namespace MyGPA
             refreshGrades();
         }
 
-        private void refreshGrades()
+        public void refreshGrades()
         {
             try
             {
@@ -55,7 +56,23 @@ namespace MyGPA
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (dataGridView1.SelectedRows.Count != 0)
+                {
+                    sql_con.Open();
+                    foreach (DataGridViewRow r in dataGridView1.SelectedRows)
+                    {
+                        command = new SQLiteCommand("DELETE FROM grades"+ lastName+firstName +" WHERE className = '" + r.Cells["className"].Value + "' AND year = "
+                            + r.Cells["year"].Value, sql_con);
+                        command.ExecuteNonQuery();
+                    }
+                    sql_con.Close();
+                    refreshGrades();
+                }
+            }
+            catch (Exception e1)
+            { }
         }
 
         private void button3_Click(object sender, EventArgs e)
