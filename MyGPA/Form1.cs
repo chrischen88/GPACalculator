@@ -43,7 +43,7 @@ namespace MyGPA
         {
             try
             {
-                if(Application.OpenForms.OfType<Form2>().Count() == 0 && Application.OpenForms.OfType<RemoveStudent>().Count() == 0)
+                if(Application.OpenForms.OfType<Form2>().Count() == 0)
                 {
                     Form2 addStudent = new Form2();
                     addStudent.Show();
@@ -60,7 +60,7 @@ namespace MyGPA
                 command = new SQLiteCommand("insert into students(lastName, firstName, GPA, credits) values ('" +
                     ls + "', '" + fs + "', '0.000', 0)", sql_con);
                 command.ExecuteNonQuery();
-                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int)", sql_con);
+                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int, weight int)", sql_con);
                 command.ExecuteNonQuery();
                 sql_con.Close();
             }
@@ -71,18 +71,29 @@ namespace MyGPA
         {
             try
             {
-                if (Application.OpenForms.OfType<RemoveStudent>().Count() == 0 && Application.OpenForms.OfType<Form2>().Count() == 0)
+                if (dataGridView1.SelectedRows.Count != 0)
                 {
-                    RemoveStudent rs = new RemoveStudent();
-                    rs.Show();
+                    sql_con.Open();
+                    foreach (DataGridViewRow r in dataGridView1.SelectedRows)
+                    {
+                        command = new SQLiteCommand("DROP TABLE grades" + r.Cells["lastName"].Value
+                            + r.Cells["firstName"].Value, sql_con);
+                        command.ExecuteNonQuery();
+                        command = new SQLiteCommand("DELETE FROM students WHERE firstName = '" + r.Cells["firstName"].Value + "' AND lastName = '"
+                            + r.Cells["lastName"].Value + "'", sql_con);
+                        command.ExecuteNonQuery();
+                    }
+                    sql_con.Close();
+                    refreshStudentsTable();
                 }
             }
-            catch (Exception e1) { }
+            catch (Exception e1)
+            { }
         }
 
         private void editStudent_Click(object sender, EventArgs e)
         {
-            if(Application.OpenForms.OfType<editStudent>().Count()==0)
+            if (Application.OpenForms.OfType<editStudent>().Count() == 0)
             {
                 sql_con.Open();
                 if (dataGridView1.SelectedRows.Count == 1)

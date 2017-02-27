@@ -42,35 +42,61 @@ namespace MyGPA
         private void button1_Click(object sender, EventArgs e)
         {
             sql_con.Open();
-            if(dataGridView1.SelectedRows.Count == 1)
-            {
-                if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) > 0.5)
+                if (dataGridView1.SelectedRows.Count == 1)
                 {
-                    try
+                    if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) > 0.5)
                     {
-                        DataGridViewRow r = dataGridView1.SelectedRows[0];
-                        command = new SQLiteCommand("INSERT INTO grades"+lastName+firstName+"(className, average, year) VALUES ('"
-                            + r.Cells["className"].Value +" Semester 1', '"+ textBox2.Text +"', "+ textBox3.Text +")",sql_con);
-                        command.ExecuteNonQuery();
-                        command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year) VALUES ('"
-                            + r.Cells["className"].Value + " Semester 2', '" + textBox4.Text + "', " + textBox3.Text + ")",sql_con);
-                        command.ExecuteNonQuery();
+                        try
+                        {
+                            if (Convert.ToInt64(textBox2.Text) > 100 || Convert.ToInt64(textBox4.Text) > 100)
+                            {
+                                DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, weight) VALUES ('"
+                                    + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ")", sql_con);
+                                command.ExecuteNonQuery();
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, weight) VALUES ('"
+                                    + r.Cells["className"].Value + " Semester 2', '" + textBox4.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ")", sql_con);
+                                command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                 MessageBox.Show("Average over 100", "ERROR");
+                            }
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBox.Show("Missing/Wrong Input", "ERROR");
+                        }
                     }
-                    catch (Exception e1)
+                    else
                     {
-
+                        try
+                        {
+                            if (Convert.ToInt32(textBox2.Text) > 100 || Convert.ToInt32(textBox4.Text) > 100)
+                            {
+                                DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, weight) VALUES ('"
+                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ")", sql_con);
+                                command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Average over 100", "ERROR");
+                            }
+                        }
+                        catch (Exception e1) { MessageBox.Show("Missing Input", "ERROR"); }
                     }
                 }
                 else
                 {
-
+                    MessageBox.Show("Selected more than 1 class", "ERROR");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Selected more than 1 class","ERROR");
-            }
+            
             sql_con.Close();
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
             editStudent es = (editStudent)System.Windows.Forms.Application.OpenForms["editStudent"];
             es.refreshGrades();
         }

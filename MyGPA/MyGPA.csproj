@@ -95,12 +95,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoveStudent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RemoveStudent.Designer.cs">
-      <DependentUpon>RemoveStudent.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="editStudent.resx">
       <DependentUpon>editStudent.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,9 +116,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RemoveStudent.resx">
-      <DependentUpon>RemoveStudent.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

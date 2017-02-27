@@ -63,7 +63,7 @@ namespace MyGPA
                     sql_con.Open();
                     foreach (DataGridViewRow r in dataGridView1.SelectedRows)
                     {
-                        command = new SQLiteCommand("DELETE FROM grades"+ lastName+firstName +" WHERE className = '" + r.Cells["className"].Value + "' AND year = "
+                        command = new SQLiteCommand("DELETE FROM grades"+ lastName+firstName +" WHERE className LIKE '%" + r.Cells["className"].Value + "%' AND year = "
                             + r.Cells["year"].Value, sql_con);
                         command.ExecuteNonQuery();
                     }
@@ -78,6 +78,11 @@ namespace MyGPA
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void updateGPA()
+        {
+
         }
     }
 }
