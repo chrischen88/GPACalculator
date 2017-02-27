@@ -80,9 +80,17 @@ namespace MyGPA
             this.Close();
         }
 
-        public void updateGPA()
+        public double updateGPA()
         {
+            double total = 0;
+            if (dataGridView1.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow r in dataGridView1.Rows)
+                {
 
+                }
+            }
+            return total;
         }
     }
 }
