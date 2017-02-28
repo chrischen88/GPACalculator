@@ -60,7 +60,7 @@ namespace MyGPA
                 command = new SQLiteCommand("insert into students(lastName, firstName, GPA, credits) values ('" +
                     ls + "', '" + fs + "', '0.000', 0)", sql_con);
                 command.ExecuteNonQuery();
-                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int, weight int)", sql_con);
+                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int, tier int, credit numeric)", sql_con);
                 command.ExecuteNonQuery();
                 sql_con.Close();
             }
