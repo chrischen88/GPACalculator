@@ -71,6 +71,7 @@ namespace MyGPA
                     }
                     sql_con.Close();
                     refreshGrades();
+                    updateGPA();
                 }
             }
             catch (Exception e1)
@@ -90,6 +91,7 @@ namespace MyGPA
                 sql_con.Open();
                 double total = 0;
                 int count = 0;
+                double totalCredits = 0;
                 Debug.WriteLine("help");
                 if (dataGridView1.Rows.Count > 0)
                 {
@@ -112,12 +114,15 @@ namespace MyGPA
                             Debug.WriteLine(command.ExecuteScalar());
                             total += Convert.ToDouble(command.ExecuteScalar());
                             count++;
+                            totalCredits += credits;
                         }
                     }
                     total /= count;
                     Debug.WriteLine(total);
                 }
-                command = new SQLiteCommand("UPDATE students SET GPA = " + total + " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
+                command = new SQLiteCommand("UPDATE students SET GPA = " + Math.Round(total,3) + " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
+                command.ExecuteNonQuery();
+                command = new SQLiteCommand("UPDATE students SET credits = "+ totalCredits+ " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
                 command.ExecuteNonQuery();
                 connect.Close();
                 sql_con.Close();

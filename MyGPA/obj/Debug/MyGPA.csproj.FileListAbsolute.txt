@@ -16,7 +16,6 @@ c:\users\18chenc\documents\visual studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyG
 c:\users\18chenc\documents\visual studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.exe
 c:\users\18chenc\documents\visual studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.pdb
 c:\users\18chenc\documents\visual studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.Form2.resources
-c:\users\18chenc\documents\visual studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.RemoveStudent.resources
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\bin\Debug\MyGPA.exe.config
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.exe
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.pdb
@@ -38,3 +37,4 @@ C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Deb
 C:\Users\18chenc\Documents\Visual Studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.editStudent.resources
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.editStudent.resources
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.EditStudentAddClass.resources
+C:\Users\18chenc\Documents\Visual Studio 2015\Projects\MyGPA\MyGPA\obj\Debug\MyGPA.EditStudentAddClass.resources
