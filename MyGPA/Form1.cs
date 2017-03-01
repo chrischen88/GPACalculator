@@ -21,6 +21,7 @@ namespace MyGPA
         {
             InitializeComponent();
             sql_con = new SQLiteConnection("Data Source = studentsGPA.sqlite");
+            updateMultipleGPA();
             refreshStudentsTable();
         }
 
@@ -108,6 +109,18 @@ namespace MyGPA
                 }
                 sql_con.Close();
             }
+        }
+
+        private void updateMultipleGPA()
+        {
+            sql_con.Open();
+            foreach(DataGridViewRow r in dataGridView1.Rows)
+            {
+                editStudent es = new MyGPA.editStudent((String)r.Cells["lastName"].Value, (String)r.Cells["firstName"].Value);
+                es.updateGPA();
+                es.Close();
+            }
+            sql_con.Close();
         }
 
     }
