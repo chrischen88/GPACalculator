@@ -90,6 +90,7 @@ namespace MyGPA
                 sql_con.Open();
                 double total = 0;
                 int count = 0;
+                Debug.WriteLine("help");
                 if (dataGridView1.Rows.Count > 0)
                 {
                     foreach (DataGridViewRow r in dataGridView1.Rows)
@@ -99,18 +100,17 @@ namespace MyGPA
                         double credits = Convert.ToDouble(r.Cells["credit"].Value);
                         if (average > 70)
                         {
-                            Debug.WriteLine("help");
-                            if (average >= 97) command = new SQLiteCommand("select 97 from averages where tier = " + tier, connect);
-                            else if (average >= 93) command = new SQLiteCommand("SELECT 93 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 90) command = new SQLiteCommand("SELECT 90 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 87) command = new SQLiteCommand("SELECT 87 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 83) command = new SQLiteCommand("SELECT 83 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 80) command = new SQLiteCommand("SELECT 80 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 77) command = new SQLiteCommand("SELECT 77 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 73) command = new SQLiteCommand("SELECT 73 FROM averages WHERE tier = " + tier, connect);
-                            else command = new SQLiteCommand("SELECT 71 FROM averages WHERE tier = " + tier, connect);
-                            //Debug.WriteLine(command.ExecuteReader()[0]);
-                            //total += Convert.ToDouble(command.ExecuteReader()[0]);
+                            if (average >= 97) command = new SQLiteCommand("select g97 from averages where tier = " + tier, connect);
+                            else if (average >= 93) command = new SQLiteCommand("SELECT g93 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 90) command = new SQLiteCommand("SELECT g90 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 87) command = new SQLiteCommand("SELECT g87 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 83) command = new SQLiteCommand("SELECT g83 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 80) command = new SQLiteCommand("SELECT g80 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 77) command = new SQLiteCommand("SELECT g77 FROM averages WHERE tier = " + tier, connect);
+                            else if (average >= 73) command = new SQLiteCommand("SELECT g73 FROM averages WHERE tier = " + tier, connect);
+                            else command = new SQLiteCommand("SELECT g71 FROM averages WHERE tier = " + tier, connect);
+                            Debug.WriteLine(command.ExecuteScalar());
+                            total += Convert.ToDouble(command.ExecuteScalar());
                             count++;
                         }
                     }

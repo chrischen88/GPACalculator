@@ -21,6 +21,7 @@ namespace MyGPA
         {
             InitializeComponent();
             sql_con = new SQLiteConnection("Data Source = studentsGPA.sqlite");
+            refreshStudentsTable();
             updateMultipleGPA();
             refreshStudentsTable();
         }
