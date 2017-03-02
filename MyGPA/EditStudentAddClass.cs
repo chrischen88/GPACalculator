@@ -48,16 +48,16 @@ namespace MyGPA
                     {
                         try
                         {
-                            if (Convert.ToInt64(textBox2.Text) < 100 || Convert.ToInt64(textBox4.Text) < 100)
+                            if (Convert.ToInt64(textBox2.Text) <= 100 || Convert.ToInt64(textBox4.Text) <= 100)
                             {
                                 DataGridViewRow r = dataGridView1.SelectedRows[0];
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, credit) VALUES ('"
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
                                     + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value 
-                                    + ", " + r.Cells["credit"].Value + ")", sql_con);
+                                    + ")", sql_con);
                                 command.ExecuteNonQuery();
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, credit) VALUES ('"
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
                                     + r.Cells["className"].Value + " Semester 2', '" + textBox4.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value 
-                                    + ", "+ r.Cells["credit"].Value + ")", sql_con);
+                                    + ")", sql_con);
                                 command.ExecuteNonQuery();
                             }
                             else
@@ -74,12 +74,11 @@ namespace MyGPA
                     {
                         try
                         {
-                            if (Convert.ToInt32(textBox2.Text) < 100 || Convert.ToInt32(textBox4.Text) < 100)
+                            if (Convert.ToInt32(textBox2.Text) <= 100)
                             {
                                 DataGridViewRow r = dataGridView1.SelectedRows[0];
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, credit) VALUES ('"
-                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ", "
-                                    + r.Cells["credit"].Value+")", sql_con);
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
+                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ")", sql_con);
                                 command.ExecuteNonQuery();
                             }
                             else
@@ -101,7 +100,10 @@ namespace MyGPA
             textBox3.Text = "";
             textBox4.Text = "";
             editStudent es = (editStudent)System.Windows.Forms.Application.OpenForms["editStudent"];
+            Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
             es.refreshGrades();
+            es.updateGPA();
+            f.refreshStudentsTable();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

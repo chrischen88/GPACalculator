@@ -70,8 +70,10 @@ namespace MyGPA
                         command.ExecuteNonQuery();
                     }
                     sql_con.Close();
-                    refreshGrades();
+                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["editStudent"];
                     updateGPA();
+                    refreshGrades();
+                    f.refreshStudentsTable();
                 }
             }
             catch (Exception e1)
@@ -92,14 +94,12 @@ namespace MyGPA
                 double total = 0;
                 int count = 0;
                 double totalCredits = 0;
-                Debug.WriteLine("help");
                 if (dataGridView1.Rows.Count > 0)
                 {
                     foreach (DataGridViewRow r in dataGridView1.Rows)
                     {
                         int tier = Convert.ToInt32(r.Cells["tier"].Value);
                         int average = Convert.ToInt32(r.Cells["average"].Value);
-                        double credits = Convert.ToDouble(r.Cells["credit"].Value);
                         if (average > 70)
                         {
                             if (average >= 97) command = new SQLiteCommand("select g97 from averages where tier = " + tier, connect);
@@ -111,14 +111,12 @@ namespace MyGPA
                             else if (average >= 77) command = new SQLiteCommand("SELECT g77 FROM averages WHERE tier = " + tier, connect);
                             else if (average >= 73) command = new SQLiteCommand("SELECT g73 FROM averages WHERE tier = " + tier, connect);
                             else command = new SQLiteCommand("SELECT g71 FROM averages WHERE tier = " + tier, connect);
-                            Debug.WriteLine(command.ExecuteScalar());
                             total += Convert.ToDouble(command.ExecuteScalar());
                             count++;
-                            totalCredits += credits;
+                            totalCredits += 0.5;
                         }
                     }
                     total /= count;
-                    Debug.WriteLine(total);
                 }
                 command = new SQLiteCommand("UPDATE students SET GPA = " + Math.Round(total,3) + " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
                 command.ExecuteNonQuery();
