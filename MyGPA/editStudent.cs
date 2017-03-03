@@ -43,7 +43,7 @@ namespace MyGPA
                 sql_con.Close();
             }
             catch (Exception e)
-            { }
+            { Debug.WriteLine("Refresh Grades Failed"); }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,6 +68,7 @@ namespace MyGPA
                         command = new SQLiteCommand("DELETE FROM grades"+ lastName+firstName +" WHERE className LIKE '%" + r.Cells["className"].Value + "%' AND year = "
                             + r.Cells["year"].Value, sql_con);
                         command.ExecuteNonQuery();
+                        Debug.WriteLine("It removed");
                     }
                     sql_con.Close();
                     Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
@@ -100,32 +101,39 @@ namespace MyGPA
                     {
                         int tier = Convert.ToInt32(r.Cells["tier"].Value);
                         int average = Convert.ToInt32(r.Cells["average"].Value);
+                        String exempted = (String)r.Cells["exempted"].Value;
                         if (average > 70)
                         {
-                            if (average >= 97) command = new SQLiteCommand("select g97 from averages where tier = " + tier, connect);
-                            else if (average >= 93) command = new SQLiteCommand("SELECT g93 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 90) command = new SQLiteCommand("SELECT g90 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 87) command = new SQLiteCommand("SELECT g87 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 83) command = new SQLiteCommand("SELECT g83 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 80) command = new SQLiteCommand("SELECT g80 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 77) command = new SQLiteCommand("SELECT g77 FROM averages WHERE tier = " + tier, connect);
-                            else if (average >= 73) command = new SQLiteCommand("SELECT g73 FROM averages WHERE tier = " + tier, connect);
-                            else command = new SQLiteCommand("SELECT g71 FROM averages WHERE tier = " + tier, connect);
-                            total += Convert.ToDouble(command.ExecuteScalar());
-                            count++;
+                            if(exempted.Equals("NO"))
+                            {
+                                if (average >= 97) command = new SQLiteCommand("select g97 from averages where tier = " + tier, connect);
+                                else if (average >= 93) command = new SQLiteCommand("SELECT g93 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 90) command = new SQLiteCommand("SELECT g90 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 87) command = new SQLiteCommand("SELECT g87 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 83) command = new SQLiteCommand("SELECT g83 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 80) command = new SQLiteCommand("SELECT g80 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 77) command = new SQLiteCommand("SELECT g77 FROM averages WHERE tier = " + tier, connect);
+                                else if (average >= 73) command = new SQLiteCommand("SELECT g73 FROM averages WHERE tier = " + tier, connect);
+                                else                    command = new SQLiteCommand("SELECT g71 FROM averages WHERE tier = " + tier, connect);
+                                total += Convert.ToDouble(command.ExecuteScalar());
+                                count++;
+                            }
                             totalCredits += 0.5;
                         }
                     }
-                    total /= count;
+                    if(count> 0)
+                    {
+                        total /= count;
+                    }
                 }
-                command = new SQLiteCommand("UPDATE students SET GPA = " + Math.Round(total,3) + " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
+                command = new SQLiteCommand("UPDATE students SET GPA = " + Math.Round(total, 3) + " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
                 command.ExecuteNonQuery();
                 command = new SQLiteCommand("UPDATE students SET credits = "+ totalCredits+ " WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
                 command.ExecuteNonQuery();
                 connect.Close();
                 sql_con.Close();
             }
-            catch (Exception e1) { }
+            catch (Exception e1) { Debug.WriteLine("Update failed"); }
         }
     }
 }

@@ -44,27 +44,43 @@ namespace MyGPA
             sql_con.Open();
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
+                    String s = checkBox1.Checked ? "YES" : "NO";
+                    String s2 = checkBox2.Checked ? "YES" : "NO";
                     if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) > 0.5)
                     {
                         try
                         {
-                            if (Convert.ToInt64(textBox2.Text) <= 100 || Convert.ToInt64(textBox4.Text) <= 100)
+                            if(textBox2.Text.Length > 0)
                             {
-                                DataGridViewRow r = dataGridView1.SelectedRows[0];
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
-                                    + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value 
-                                    + ")", sql_con);
-                                command.ExecuteNonQuery();
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
-                                    + r.Cells["className"].Value + " Semester 2', '" + textBox4.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value 
-                                    + ")", sql_con);
-                                command.ExecuteNonQuery();
+                                if (Convert.ToInt64(textBox2.Text) <= 100)
+                                {
+                                    DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                    command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                        + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
+                                        + ", '" + s + "')", sql_con);
+                                    command.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Average over 100", "ERROR");
+                                }
                             }
-                            else
+                            if (textBox3.Text.Length > 0)
                             {
-                                 MessageBox.Show("Average over 100", "ERROR");
+                                if (Convert.ToInt64(textBox2.Text) <= 100)
+                                {
+                                    DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                    command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                        + r.Cells["className"].Value + " Semester 2', '" + textBox3.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
+                                        + ", '" + s + "')", sql_con);
+                                    command.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Average over 100", "ERROR");
+                                }
                             }
-                        }
+                    }
                         catch (Exception e1)
                         {
                             MessageBox.Show("Missing/Wrong Input", "ERROR");
@@ -77,8 +93,8 @@ namespace MyGPA
                             if (Convert.ToInt32(textBox2.Text) <= 100)
                             {
                                 DataGridViewRow r = dataGridView1.SelectedRows[0];
-                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier) VALUES ('"
-                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox3.Text + ", " + r.Cells["tier"].Value + ")", sql_con);
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value + ", '"+ s+ "')", sql_con);
                                 command.ExecuteNonQuery();
                             }
                             else
