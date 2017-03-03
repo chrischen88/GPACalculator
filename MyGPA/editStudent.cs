@@ -70,7 +70,7 @@ namespace MyGPA
                         command.ExecuteNonQuery();
                     }
                     sql_con.Close();
-                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["editStudent"];
+                    Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
                     updateGPA();
                     refreshGrades();
                     f.refreshStudentsTable();
