@@ -59,7 +59,8 @@ namespace MyGPA
                                         + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
                                         + ", '" + s + "')", sql_con);
                                     command.ExecuteNonQuery();
-                                }
+                                if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                            }
                                 else
                                 {
                                     MessageBox.Show("Average over 100", "ERROR");
@@ -74,7 +75,8 @@ namespace MyGPA
                                         + r.Cells["className"].Value + " Semester 2', '" + textBox3.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
                                         + ", '" + s + "')", sql_con);
                                     command.ExecuteNonQuery();
-                                }
+                                if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                            }
                                 else
                                 {
                                     MessageBox.Show("Average over 100", "ERROR");
@@ -96,7 +98,8 @@ namespace MyGPA
                                 command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
                                     + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value + ", '"+ s+ "')", sql_con);
                                 command.ExecuteNonQuery();
-                            }
+                            if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                        }
                             else
                             {
                                 MessageBox.Show("Average over 100", "ERROR");
