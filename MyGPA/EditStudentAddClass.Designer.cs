@@ -1,4 +1,7 @@
-﻿namespace MyGPA
+﻿using System;
+using System.Windows.Forms;
+
+namespace MyGPA
 {
     partial class EditStudentAddClass
     {
@@ -172,12 +175,14 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
             this.Name = "EditStudentAddClass";
+            this.ShowInTaskbar = false;
             this.Text = "Add a Class";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
 
         #endregion
 

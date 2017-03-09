@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace MyGPA
 {
@@ -68,7 +69,7 @@ namespace MyGPA
                             }
                             if (textBox3.Text.Length > 0)
                             {
-                                if (Convert.ToInt64(textBox2.Text) <= 100)
+                                if (Convert.ToInt64(textBox3.Text) <= 100)
                                 {
                                     DataGridViewRow r = dataGridView1.SelectedRows[0];
                                     command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
@@ -118,6 +119,8 @@ namespace MyGPA
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
             editStudent es = (editStudent)System.Windows.Forms.Application.OpenForms["editStudent"];
             Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
             es.refreshGrades();
@@ -158,6 +161,8 @@ namespace MyGPA
                 this.button1.Location = new System.Drawing.Point(12, 254);
                 this.button2.Location = new System.Drawing.Point(298, 254);
             }
+            textBox4.Focus();
         }
+
     }
 }
