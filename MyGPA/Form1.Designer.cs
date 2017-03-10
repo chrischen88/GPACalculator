@@ -48,12 +48,12 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(443, 249);
+            this.dataGridView1.Size = new System.Drawing.Size(546, 249);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(505, 255);
+            this.button1.Location = new System.Drawing.Point(321, 284);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -72,7 +72,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(505, 284);
+            this.button2.Location = new System.Drawing.Point(483, 284);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -82,7 +82,7 @@
             // 
             // editStudent
             // 
-            this.editStudent.Location = new System.Drawing.Point(505, 226);
+            this.editStudent.Location = new System.Drawing.Point(402, 284);
             this.editStudent.Name = "editStudent";
             this.editStudent.Size = new System.Drawing.Size(75, 23);
             this.editStudent.TabIndex = 4;
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 319);
+            this.ClientSize = new System.Drawing.Size(571, 319);
             this.Controls.Add(this.editStudent);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);

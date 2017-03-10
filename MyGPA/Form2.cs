@@ -29,13 +29,13 @@ namespace MyGPA
                 if(firstNameBox.Text.Length > 0 && lastNameBox.Text.Length > 0)
                 {
                     Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
-                    f.addStudent(firstNameBox.Text, lastNameBox.Text);
+                    f.addStudent(firstNameBox.Text, lastNameBox.Text, Convert.ToInt32(gradeBox.Text));
                     f.refreshStudentsTable();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Missing an Input", "ERROR");
+                    MessageBox.Show("Missing an Input/Wrong Input", "ERROR");
                 }
             }
             catch (Exception e1) { }

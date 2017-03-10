@@ -54,15 +54,15 @@ namespace MyGPA
             catch (Exception e1) { }
         }
 
-        public void addStudent(String fs, String ls)
+        public void addStudent(String fs, String ls, int grade)
         {
             try
             {
                 sql_con.Open();
-                command = new SQLiteCommand("insert into students(lastName, firstName, GPA, credits) values ('" +
-                    ls + "', '" + fs + "', '0.000', 0)", sql_con);
+                command = new SQLiteCommand("insert into students(lastName, firstName, grade, GPA, credits) values ('" +
+                    ls + "', '" + fs + "', " + grade +", '0.000', 0)", sql_con);
                 command.ExecuteNonQuery();
-                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, year int, tier int, exempted text)", sql_con);
+                command = new SQLiteCommand("create table grades" + ls + fs + "(className varchar(20), average int, tier int, exempted text)", sql_con);
                 command.ExecuteNonQuery();
                 sql_con.Close();
             }

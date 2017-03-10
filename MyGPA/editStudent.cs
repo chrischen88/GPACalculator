@@ -27,6 +27,10 @@ namespace MyGPA
             lastName = ln;
             sql_con = new SQLiteConnection("Data Source = studentsGPA.sqlite");
             connect = new SQLiteConnection("Data Source = weightAverage.sqlite");
+            sql_con.Open();
+            command = new SQLiteCommand("SELECT grade FROM students WHERE firstName = '" + firstName + "' AND lastName = '" + lastName + "'", sql_con);
+            textBox1.Text = Convert.ToString(command.ExecuteScalar());
+            sql_con.Close();
             refreshGrades();
         }
 
@@ -83,6 +87,12 @@ namespace MyGPA
 
         private void button3_Click(object sender, EventArgs e)
         {
+            sql_con.Open();
+            command = new SQLiteCommand("UPDATE students SET grade = " + textBox1.Text + " WHERE lastName = '" + lastName + "' AND firstName = '" + firstName + "'", sql_con);
+            command.ExecuteNonQuery();
+            sql_con.Close();
+            Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+            f.refreshStudentsTable();
             this.Close();
         }
 

@@ -37,10 +37,8 @@ namespace MyGPA
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -106,15 +104,6 @@ namespace MyGPA
             this.label1.TabIndex = 5;
             this.label1.Text = "Semester 1 Average";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(295, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Year";
-            // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(118, 256);
@@ -131,14 +120,6 @@ namespace MyGPA
             this.label3.Size = new System.Drawing.Size(103, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Semester 2 Average";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(330, 12);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(40, 20);
-            this.textBox4.TabIndex = 9;
-            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
             // 
             // checkBox1
             // 
@@ -167,10 +148,8 @@ namespace MyGPA
             this.ClientSize = new System.Drawing.Size(382, 304);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button2);
@@ -195,10 +174,8 @@ namespace MyGPA
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
     }
