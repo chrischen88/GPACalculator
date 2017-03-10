@@ -164,5 +164,111 @@ namespace MyGPA
             textBox4.Focus();
         }
 
+        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            {
+                textBox3.Focus();
+            }
+        }
+
+        private void textBox3_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            {
+                sql_con.Open();
+                if (dataGridView1.SelectedRows.Count == 1)
+                {
+                    String s = checkBox1.Checked ? "YES" : "NO";
+                    String s2 = checkBox2.Checked ? "YES" : "NO";
+                    if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) > 0.5)
+                    {
+                        try
+                        {
+                            if (textBox2.Text.Length > 0)
+                            {
+                                if (Convert.ToInt64(textBox2.Text) <= 100)
+                                {
+                                    DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                    command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                        + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
+                                        + ", '" + s + "')", sql_con);
+                                    command.ExecuteNonQuery();
+                                    if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Average over 100", "ERROR");
+                                }
+                            }
+                            if (textBox3.Text.Length > 0)
+                            {
+                                if (Convert.ToInt64(textBox3.Text) <= 100)
+                                {
+                                    DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                    command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                        + r.Cells["className"].Value + " Semester 2', '" + textBox3.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value
+                                        + ", '" + s + "')", sql_con);
+                                    command.ExecuteNonQuery();
+                                    if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Average over 100", "ERROR");
+                                }
+                            }
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBox.Show("Missing/Wrong Input", "ERROR");
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            if (Convert.ToInt32(textBox2.Text) <= 100)
+                            {
+                                DataGridViewRow r = dataGridView1.SelectedRows[0];
+                                command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, year, tier, exempted) VALUES ('"
+                                    + r.Cells["className"].Value + "', '" + textBox2.Text + "', " + textBox4.Text + ", " + r.Cells["tier"].Value + ", '" + s + "')", sql_con);
+                                command.ExecuteNonQuery();
+                                if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Average over 100", "ERROR");
+                            }
+                        }
+                        catch (Exception e1) { MessageBox.Show("Missing Input", "ERROR"); }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selected more than 1 class", "ERROR");
+                }
+
+                sql_con.Close();
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                editStudent es = (editStudent)System.Windows.Forms.Application.OpenForms["editStudent"];
+                Form1 f = (Form1)System.Windows.Forms.Application.OpenForms["Form1"];
+                es.refreshGrades();
+                es.updateGPA();
+                f.refreshStudentsTable();
+            }
+        }
     }
 }

@@ -95,6 +95,7 @@ namespace MyGPA
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 4;
+            this.textBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyUp);
             // 
             // label1
             // 
@@ -120,6 +121,7 @@ namespace MyGPA
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 7;
+            this.textBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyUp);
             // 
             // label3
             // 
@@ -136,6 +138,7 @@ namespace MyGPA
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(40, 20);
             this.textBox4.TabIndex = 9;
+            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
             // 
             // checkBox1
             // 
