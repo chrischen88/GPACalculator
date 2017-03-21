@@ -17,3 +17,5 @@ C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Rel
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Release\MyGPA.csproj.GenerateResource.Cache
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Release\MyGPA.exe
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Release\MyGPA.pdb
+C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\bin\Release\System.Data.SQLite.dll.config
+C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Release\MyGPA.csprojResolveAssemblyReference.cache
