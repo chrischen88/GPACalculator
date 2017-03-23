@@ -263,5 +263,19 @@ namespace MyGPA
                 f.refreshStudentsTable();
             }
         }
+
+        private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Delete)
+            {
+                if(dataGridView1.SelectedRows.Count > 0)
+                {
+                    foreach(DataGridViewRow r in dataGridView1.SelectedRows)
+                    {
+                        
+                    }
+                }
+            }
+        }
     }
 }
