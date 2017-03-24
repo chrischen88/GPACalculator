@@ -264,18 +264,18 @@ namespace MyGPA
             }
         }
 
-        private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            if(e.KeyCode==Keys.Delete)
+            if (Application.OpenForms.OfType<ManageClass>().Count() == 0)
             {
-                if(dataGridView1.SelectedRows.Count > 0)
-                {
-                    foreach(DataGridViewRow r in dataGridView1.SelectedRows)
-                    {
-                        
-                    }
-                }
+                ManageClass es = new ManageClass();
+                es.Show();
             }
+        }
+
+        private void refreshTable()
+        {
+
         }
     }
 }

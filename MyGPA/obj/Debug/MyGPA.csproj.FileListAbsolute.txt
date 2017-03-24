@@ -39,3 +39,4 @@ C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Deb
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.pdb
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.csprojResolveAssemblyReference.cache
+C:\Users\chenc\Documents\Visual Studio 2015\Projects\GPACalculator\MyGPA\obj\Debug\MyGPA.ManageClass.resources
