@@ -36,6 +36,7 @@ namespace MyGPA
 
         private void button1_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 sql_con.Open();
@@ -66,6 +67,9 @@ namespace MyGPA
             }
             catch (Exception e1)
             { }
+=======
+            if()
+>>>>>>> origin/master
         }
     }
 }
