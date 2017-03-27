@@ -21,7 +21,7 @@ namespace MyGPA
             InitializeComponent();
             sql_con = new SQLiteConnection("Data Source = ClassWeight.db");
             sql_con.Open();
-            SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT className AND tier FROM ClassWeights", sql_con);
+            SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT className, tier FROM ClassWeights", sql_con);
             DataTable dt = new DataTable();
             sqlData.Fill(dt);
             this.dataGridView1.DataSource = dt;
@@ -36,7 +36,36 @@ namespace MyGPA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                sql_con.Open();
+                command = new SQLiteCommand("INSERT INTO ClassWeights(className, tier, credit) VALUES ('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "')",sql_con);
+                command.ExecuteNonQuery();
+                sql_con.Close();
+               
+            }
+            catch(Exception e1)
+            {
+
+            }
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                sql_con.Open();
+                SQLiteDataAdapter sqlData = new SQLiteDataAdapter("select * from ClassWeights WHERE className LIKE '%" + textBox4.Text + "%'", sql_con);
+                DataTable dt = new DataTable();
+                sqlData.Fill(dt);
+                this.dataGridView1.DataSource = dt;
+                sql_con.Close();
+            }
+            catch (Exception e1)
+            { }
         }
     }
 }
