@@ -42,7 +42,7 @@ namespace MyGPA
                 command = new SQLiteCommand("INSERT INTO ClassWeights(className, tier, credit) VALUES ('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "')",sql_con);
                 command.ExecuteNonQuery();
                 sql_con.Close();
-               
+                refreshClasses();
             }
             catch(Exception e1)
             {
@@ -76,14 +76,27 @@ namespace MyGPA
                 sql_con.Open();
                 foreach(DataGridViewRow r in dataGridView1.SelectedRows)
                 {
-                    command = new SQLiteCommand("DELETE FROM ClassWeights WHERE className LIKE '%" + "");
+                    command = new SQLiteCommand("DELETE FROM ClassWeights WHERE className LIKE '%" + textBox4.Text + "%' AND tier = " +
+                        r.Cells["tier"].Value, sql_con);
+                    command.ExecuteNonQuery();
                 }
                 sql_con.Close();
+                refreshClasses();
             }
             catch(Exception e1)
             {
 
             }
+        }
+
+        private void refreshClasses()
+        {
+            sql_con.Open();
+            SQLiteDataAdapter sqlData = new SQLiteDataAdapter("SELECT className, tier FROM ClassWeights", sql_con);
+            DataTable dt = new DataTable();
+            sqlData.Fill(dt);
+            this.dataGridView1.DataSource = dt;
+            sql_con.Close();
         }
     }
 }
