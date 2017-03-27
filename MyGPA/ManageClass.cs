@@ -68,5 +68,22 @@ namespace MyGPA
             { }
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sql_con.Open();
+                foreach(DataGridViewRow r in dataGridView1.SelectedRows)
+                {
+                    command = new SQLiteCommand("DELETE FROM ClassWeights WHERE className LIKE '%" + "");
+                }
+                sql_con.Close();
+            }
+            catch(Exception e1)
+            {
+
+            }
+        }
     }
 }
