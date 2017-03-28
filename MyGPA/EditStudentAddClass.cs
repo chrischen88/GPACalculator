@@ -208,7 +208,7 @@ namespace MyGPA
                                 {
                                     DataGridViewRow r = dataGridView1.SelectedRows[0];
                                     command = new SQLiteCommand("INSERT INTO grades" + lastName + firstName + "(className, average, tier, exempted) VALUES ('"
-                                        + r.Cells["className"].Value + " Semester 1', '" + textBox2.Text + "', " + r.Cells["tier"].Value
+                                        + r.Cells["className"].Value + " Semester 2', '" + textBox3.Text + "', " + r.Cells["tier"].Value
                                         + ", '" + s + "')", sql_con);
                                     command.ExecuteNonQuery();
                                     if (Convert.ToDouble(dataGridView1.SelectedRows[0].Cells["credit"].Value.ToString()) == 2) command.ExecuteNonQuery();

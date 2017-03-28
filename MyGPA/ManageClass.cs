@@ -76,7 +76,7 @@ namespace MyGPA
                 sql_con.Open();
                 foreach(DataGridViewRow r in dataGridView1.SelectedRows)
                 {
-                    command = new SQLiteCommand("DELETE FROM ClassWeights WHERE className LIKE '%" + textBox4.Text + "%' AND tier = " +
+                    command = new SQLiteCommand("DELETE FROM ClassWeights WHERE className LIKE '%" + r.Cells["className"].Value + "%' AND tier = " +
                         r.Cells["tier"].Value, sql_con);
                     command.ExecuteNonQuery();
                 }
